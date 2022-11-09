@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+        <link media="screen" rel="stylesheet" type="text/css"
+            href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css"
+            />
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        
+            
+<link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <!-- Latest compiled JavaScript -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+        <script src="{% static 'js/style.js'%}"></script>
+        <title style="color:#fff">HMS</title>
+    </head>
+    <body>
+        <div class="back_ground">
+            <div class="row">
+                <div class="col-md-12  row p-2 shadow  mb-1  rounded side_nav box-body d-flex ">
+                    <div class="col-md-2   text-center"><h1 style="color:#fff ;">H M S</h1></div>
+                    <div class="col-md-8"></div>
+                    
+                    <div class="col-md-2 mt-3 ml-10">
+                        {% if not user.is_authenticated%}
+                    <a class="icon" href="{% url 'sign_in'%}"><i style="font-size:25px; color: #fff;" class="bi bi-person-fill ">Sign in</i></a>
+                        {% else %}
+                    <a class="icon pull-right" title="Logout" href="{% url 'log_out' %}"><i style="font-size:25px; color: #fff;" class="fa fa-sign-out"></i></a></div>
+                    {% endif %}
+                </div>
+                <div class="col-md-12 row">
+                    <div class="side_nav" style=" width:20%; height:600px;" class="" id="mySidebar">
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <div >
+                                <button class=" btn btn-sm pull-right m-1 side_nav" onclick="openNav()" type=""  data-toggle="collapse" data-target="#collapsibleNavbar"><span id="nav_open" class="bi bi-chevron-double-right" style= "color:#fff;"></span></button>
+                            </div>
+                            {% if user.is_superuser%}
+                            
+                            <div style="height:60px;">
+                            <a class="nav-link col-md-12" href="{% url 'home' %}"><i class="hicon fa fa-fw fa-home col-md-1 "></i><span class="sideNav col-md-9 pull-right ">Home</span> </a>
+                            </div>
+                            <div style="height:60px;">
+                            <a class="nav-link col-md-12" type="button" onclick="viewPatients();"><i class=" fa fa-fw fa-user col-md-1"></i><span class="pt_nav col-md-9 pull-right">View users</span></a>
+                            </div>
+                            <div style="height:60px;">
+                            <a class="nav-link col-md-12" type="button" onclick="view_patient();"><i class=" fa fa-fw fa-user col-md-1"></i><span class="pt_nav col-md-9 pull-right">View patients</span></a>
+                            </div>
+                            <div style="height:60px;">
+                            <a class="nav-link col-md-12" type="button" onclick="department();"><i class="fa fa-fw fa-user col-md-1"></i><span class="a_c_nav col-md-9 pull-right">Add category</span></a>
+                            </div><div style="height:60px;">
+                             <a class="nav-link col-md-12" type="button" onclick="doctors();"><i class="fa fa-fw fa-user col-md-1"></i><span class="a_d_nav col-md-9 pull-right">Doctor</span></a>
+                            </div>
+                            <div style="height:60px;">
+                            <a class="nav-link col-md-12" type="button" onclick="addrole();"><i class="fa fa-fw fa-user col-md-1"></i><span class="a_d_nav col-md-9 pull-right">Add role</span></a>
+                            </div>
+                            <div style="height:60px;">
+                            <a class="nav-link col-md-12" type="button" onclick="leaveApplication();"><i class="fa fa-fw fa-user col-md-1"></i><span class="a_d_nav col-md-9 pull-right">Leave</span></a>
+                            </div>
+                            <div style="height:60px;">
+                            <a class="nav-link col-md-12 " type="button" onclick="adviewappointmnt();"><i class="fa fa-fw fa-user col-md-1"></i><span class="vpnav col-md-9 pull-right">Appointments</span></a>
+                            </div>
+                            {% endif %}
+                            {% if user.is_authenticated   %}
+                            {% if user.is_authenticated and  user.user_ext.rol_id.id == 3  %}
+                            <div style="height:60px;">
+                                <a class="nav-link col-md-12" href="{% url 'home' %}"><i class="hicon fa fa-fw fa-home col-md-1 "></i><span class="sideNav col-md-9 pull-right ">Home</span> </a>
+                            </div>
+                            <div style="height:60px;">
+                                <a class="nav-link col-md-12" type="button" onclick="TakeAppointment();"><i class="fa fa-fw fa-user col-md-1"></i><span  class="Anav col-md-9 pull-right">Take appointment</span></a>
+                            </div>
+                            {% endif %}
+                            
+                            {% if user.user_ext.rol_id.id == 2  %}
+                            <div style="height:60px;">
+                                <a class="nav-link col-md-12" href="{% url 'home' %}"><i class="hicon fa fa-fw fa-home col-md-1 "></i><span class="sideNav col-md-9 pull-right ">Home</span> </a>
+                                </div>
+                            <div style="height:60px;">
+                                <a class="nav-link col-md-12"  type="button" onclick="view_doc_wise_patient('{{user.id}}')"><i class="fa fa-fw fa-user col-md-1"></i><span class="pnav col-md-9 pull-right">view patients</span></i></a>
+                            </div>
+                            <div style="height:60px;">
+                                <a class="nav-link col-md-12"  type="button" onclick="applyLeave()"><i class="fa fa-fw fa-user col-md-1"></i><span class="pnav col-md-9 pull-right">Apply leave</span></i></a>
+                            </div>
+                            {% endif %}
+                            <div style="height:60px;">
+                                <a class="nav-link col-md-12" type="button" onclick="profile();"><i class="fa fa-fw fa-user col-md-1"></i><span class="pnav col-md-9 pull-right">Profile</span></i></a>
+                                </div>
+                            {% endif %}
+
+                            {% if user.is_authenticated and not user.is_superuser %}
+                            
+                            
+                            <div style="height:60px;">
+                                <a class="nav-link col-md-12" type="button" onclick="doctors();"><i class="fa fa-fw fa-user col-md-1"></i><span class="a_d_nav col-md-9 pull-right">View doctor</span></a>
+                            </div>
+                            {% endif %}
+
+                            
+
+                          </div>
+                    </div>
+                        <div id="main" class="" style="width:80%">
+                            
+                          <div class="tab-content col-md-12" id="section_div" >
+
+                            <div class="col-md-12 row" style="margin-top:30px ;">
+
+                                
+                                {% if user.is_superuser %}
+                                <div class="col-md-12 row d-flex justify-content-center ">
+
+                                <div class="card side_nav card_dash " style="width: 20rem; margin: 10px;">
+
+                                    <a type="button" onclick="leaveApplication();"> 
+                                    <div class="card-body m-2">
+                                      <h5 class="card-title"><i class="bi bi-clipboard-data"></i>Total Appointments</h5>
+                                      <p class="card-text">{{total_appoint}}</p>
+                                    </a>
+                                    </div>
+                                  </div>
+                                <div class="card side_nav card_dash " style="width: 20rem;margin: 10px;">
+                                    <a type="button" onclick="doctors();"> 
+                                    <div class="card-body ">
+                                      <h5 class="card-title"><i class="fa fa-fw fa-user col-md-1"></i>Total doctors</h5>
+                                      <p class="card-text">{{total_doctor}}</p>
+                                      
+                                    </div>
+                                </a>
+                                  </div>
+                                  
+                                  <div class="card side_nav card_dash " style="width: 20rem;margin: 10px;">
+                                    
+                                    <a type="button" onclick="leaveApplication();"> 
+                                   <div class="card-body ">
+                                      <h5 class="card-title"><i class="fa fa-fw fa-user col-md-1"></i> leave Applications</h5>
+                                      <p class="card-text">{{t_l_application}}</p>
+                                      
+                                    </div>
+                                </a>
+                                  </div>
+                                
+                                <div class="card side_nav card_dash " style="width: 20rem;margin: 10px;">
+                                    <a type="button" onclick="leaveApplication();"> 
+                                    <div class="card-body">
+                                      <h5 class="card-title"><i class="bi bi-clipboard-data"></i>Approved Appointment</h5>
+                                      <p class="card-text">{{con_appoint}}</p>
+                                      
+                                    </div></a>
+                                  </div>
+                                <div class="card side_nav card_dash" style="width: 20rem;margin: 10px;">
+                                    <a type="button" onclick="leaveApplication();">  
+                                    <div class="card-body">
+                                      <h5 class="card-title"><i class="bi bi-clipboard-data"></i>Requested Appointment</h5>
+                                      <p class="card-text">{{r_appoint}}</p>
+                                      
+                                    </div></a>
+                                  </div>
+                                </div>
+                                  {% endif%}
+                                  {% if user.is_authenticated and  user.user_ext.rol_id.id == 3 %}
+                                  <div class="card side_nav card_dash" style="width: 20rem;margin: 10px;">
+                                    <a type="button" onclick="TakeAppointment();">  
+                                    <div class="card-body">
+                                      <h5 class="card-title"><i class="bi bi-clipboard-data"></i>Your Appointment</h5>
+                                      <p class="card-text">{{u_appointment}}</p>
+                                      
+                                    </div></a>
+                                  </div>
+                                </div>
+
+                                  {% endif %}
+
+                                  {% if user.user_ext.rol_id.id == 2  %}
+                                  <div class="card side_nav card_dash" style="width: 20rem;margin: 10px;">
+                                    <a type="button" onclick="view_doc_wise_patient('{{user.id}}');">  
+                                    <div class="card-body">
+                                      <h5 class="card-title"><i class="bi bi-clipboard-data"></i> Appointment</h5>
+                                      <p class="card-text">{{doc_appointment}}</p>
+                                      
+                                    </div></a>
+                                  </div>
+                                  <div class="card side_nav card_dash" style="width: 20rem;margin: 10px;">
+                                    <a type="button" onclick="view_doc_wise_patient('{{user.id}}');">  
+                                    <div class="card-body">
+                                      <h5 class="card-title"><i class="bi bi-clipboard-data"></i> Approved appointment</h5>
+                                      <p class="card-text">{{doc_Approve_appoint}}</p>
+                                      
+                                    </div></a>
+                                  </div>
+                                  <div class="card side_nav card_dash" style="width: 20rem;margin: 10px;">
+                                    <a type="button" onclick="view_doc_wise_patient('{{user.id}}');">  
+                                    <div class="card-body">
+                                      <h5 class="card-title"><i class="bi bi-clipboard-data"></i> Today appointment</h5>
+                                      <p class="card-text">{{today_appoint}}</p>
+                                      
+                                    </div></a>
+                                  </div>
+                                  
+                                
+
+                                  {% endif %}
+
+
+                            </div>
+                            
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div></div>
+
+                </div>
+                
+
+            </div>
+        </div>
+
+    </body>
+</html>

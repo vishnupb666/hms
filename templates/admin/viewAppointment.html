@@ -1,0 +1,158 @@
+
+<script>
+    
+  $(document).ready(function(){
+      var ap_id = $('.ap_list').attr('data-id') 
+      var current_date = $('#today').val()
+      var a_date = $('.ap_list').attr('data-time')
+      if(a_date==current_date){
+          $('.ap_list').css("background-color", "#ffcccc");
+      }
+      
+      if(a_date==current_date){
+          // $('.ap_details').css("background-color", "#ff4d4d");
+          $('.ap_details_'+ap_id).addClass('warning_msg')
+          $('#approve_btn').hide()
+         
+      }
+  
+  })
+  
+	$('.page_link').click(function(event){
+		// preventing default actions
+    
+		event.preventDefault();
+		var page_no = $(this).attr('href');
+    console.log(page_no)
+		// ajax call
+			$.ajax({
+					type: "POST",
+					// define url name
+					url: "{% url 'viewAppointment' %}", 
+					data : {    
+					page_no : page_no, 
+					csrfmiddlewaretoken: '{{ csrf_token }}',
+				},
+				// handle a successful response
+				success: function (response) {
+          $('#section_div').html(response) 
+        },
+
+				error: function () {
+					alert('Error Occured');
+				}
+			}); 
+	}); 
+
+	
+
+  
+</script>
+
+<div class="col-md-12  mt-3 right_side row p-3 mb-5  mt-3" style="height: 400px;" >
+  <input type="hidden" id="today" value="{{today}}" >
+  <div>
+  <div class="col-md-12 text-center"><h4 class="headings">Appointments</h4></div>
+   
+  <table class="table table-bordered  table-hover" >
+        <thead>
+            <tr >
+                <th style="width:10%;">username</th>
+                <th style="width:10%;">address</th>
+                <th style="width:20%;">phone Number</th>
+                <th style="width:10%;">doctor</th>
+                <th style="width:10%;">Date</th>
+                <th style="width:10%;">time</th>
+                <th style="width:30%;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in appoint%}
+           
+            <tr class="ap_list ap_details_{{i.id}}" data-id="{{i.id}}" data-time="{{i.time}}">
+                
+                <td class="td_style" >{{i.user_id.user_id.username}}</td>
+                <td class="td_style">{{i.user_id.address}}</td>
+                <td class="td_style">{{i.user_id.phone}}</td>
+                <td class="td_style">{{i.doc_id.user_id.username}}</td>
+                <td class="td_style">{{i.date}}</td>
+                <td class="td_style">{{i.time}}</td>
+                <td class="td_style" style="width:30%;">
+                  {% if i.requested == 1%}
+                  <button class="btn-primary" id="approve_btn" onclick="approve('{{i.id}}')" >Approve</button>
+                  <button class="btn-danger" onclick="cancelappointment('{{i.id}}')">Reject</button>
+                  <button type="button" class="btn-primary"  onclick="getAppId('{{i.id}}')" >Change Doctor</button>
+                  {% elif i.requested == 2 %}
+                  <button type="button" class="btn-primary"  onclick="getAppId('{{i.id}}')" >Change Doctor</button>
+                  {% elif i.requested == 3%}
+                  <button class="btn-danger" onclick="">Rejected</button>
+                  {% endif %}
+
+                 
+                
+                 
+                </td>
+            </tr>
+            {% endfor%}
+        </tbody>
+
+    </table>
+  </div> 
+</div>
+<center>
+  <div class="pagination right_side col-md-6 ">
+    <span class="step-links col-md-12 row">
+        
+  
+        <span class="current col-md-6 mt-2 mb-2 ">
+            Page {{ appoint.number }} of {{ appoint.paginator.num_pages }}.
+        </span>
+        <div class="col-md-6 ">
+        {% if appoint.has_previous %}
+          <div class=" row">
+            <a class="page_link m-2" href="1">&laquo; first</a>
+            <a class="page_link m-2" href="{{ appoint.previous_page_number }}">previous</a>
+          </div>
+        {% endif %}
+  
+        {% if appoint.has_next %}
+        <div class=" row">
+            <a type="button" class="page_link m-2" href="{{ appoint.next_page_number }}">next</a>
+            <a type="button" class="page_link m-2" href="{{ appoint.paginator.num_pages }}">last &raquo;</a>
+          </div>
+        {% endif %}
+      </div>
+    </span>
+  </div>
+  </center>
+<div class="modal fade" id="exampleModal" tabindex="-1"  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Dcotor name</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label> Category Name</label>
+        <select name="cat_name" onchange="getdoctor()" class=" depart col-md-12" >
+          <option> Select department</option>
+            {% for i in deprt %}
+            <option value="{{i.id}}">{{i.name}}</option>
+            {% endfor %}
+        </select>
+        <label> Doctor Name</label>
+        <select name="doctor_name" class="doctor_name col-md-12" >
+            
+            <option value="">Select Doctor</option>
+            
+        </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary " onclick="" id="update_doc">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

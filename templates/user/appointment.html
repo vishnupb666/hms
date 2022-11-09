@@ -1,0 +1,109 @@
+<script>
+    $(document).ready(function(){
+        viewAppointment();
+    })
+    function viewAppointment(){
+
+url = '/viewAppointment';
+$.ajax({
+    url : url,
+    beforeSend:function(){
+        $('.listAppointments').empty()
+    },
+    success:function(result){
+        $('.listAppointments').html(result) 
+        console.log(result)  
+        
+    },
+    
+});
+
+}
+
+
+</script>
+<div class="col-md-12 
+    row">
+    <div class="col-md-8 row right_side   p-3 mb-5   mt-3 listAppointments " style="height:450px"></div>
+    <input type="hidden" id="user_id" value="{{user.id}}">
+    <div class="col-md-4 row  right_side mt-3 ml-3 " style="height:450px">
+
+        <div class="col-md-12 text-center p-3 "><h5 class="headings" >Take Appointment</h5></div>
+        <form class="was-validate" method="post" id="appoint">
+            {% csrf_token %}
+            <div class="col-md-12" style="height:300px">
+                <div class="row mt-3">
+                    
+                        <div class="col-md-12 row">
+
+                            <div class="col-md-6"><label for="doctor">Time</label></div>
+                            <div class="col-md-6"><input class="col-md-12" id="ap_date_time"
+                                    type="date" name="date"></div>
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Please fill out this
+                                field.</div>
+                        </div>
+                    
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 row">
+                    <div class="col-md-6"><label for="doctor">Category Name</label></div>
+                    <div class="col-md-6">
+                        <select class="col-md-12 depart" name="depart"
+                            onchange="getdoctor()" id="depart">
+
+                            <option name="depart" id="deoartment" value="">Select
+                                Category</option>
+                            {% for i in dep%}
+                            <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this
+                            field.</div>
+                    </div>
+                </div>
+                </div>
+
+
+                <div class="row mt-3">
+                    <div class="col-md-12 row ">
+                        <div class="col-md-6"><label for="doctor">Doctor Name</label></div>
+                        <div class="col-md-6 ">
+                            <select name="doctor" class="doctor_name col-md-12">
+                                <option value="">Select doctor</option>
+                            </select></div>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this
+                            field.</div>
+                    </div>
+
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 row ">
+                        <div class="col-md-6"><label for="time">Time</label></div>
+                        <div class="col-md-6 ">
+                            <select name="time" class="time col-md-12">
+                                <option value="">select time</option>
+                                <option value="10:00">10:00</option>
+                                <option value="10:30">10:30</option>
+                                <option value="11:00">11:00</option>
+                                <option value="11:30">11:30</option>
+                                <option value="12:00">12:00</option>
+                                <option value="1:00">1:00</option>
+                            </select></div>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this
+                            field.</div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-10 mt-3 mb-3"><button class="btn btn-primary
+                    btn-sm"
+                    type="button" onclick="takeAppointment('{{user.id}}')">Request
+                    Appointment</button></div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class=""style="height:\0px;">
+    <div class="col-md-12 text-center"> <h4 class="headings">Patients</h4></div>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+           
+            <th>Leave date</th>
+            <th>Reason</th>
+           
+            <th>Actions</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in leave_Detail %}
+        <tr>
+            
+            <td style="width:20%">{{i.leave_date}}</td>
+            <td style="width:20%">{{i.reason}}</td>
+           
+            <td style="width:20%">
+                {% if i.approve == 0 %}
+                <button class="btn btn-success btn-sm" onclick="">Requested</button>
+                {% elif i.approve == 1 %}
+                <button class="btn-sm btn-secondary" id="leave_btn" onclick="" >Approved</button>
+                {% elif i.approve == 3 %}
+                <button class="btn-sm btn-secondary" id="leave_btn" onclick="" >Reject</button>
+                {% endif %}
+
+                <!-- <button class="btn btn-danger btn-sm" onclick="cancel_levae('{{i.id}}')">Cancel</button> -->
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+    </table>
+</div>
+

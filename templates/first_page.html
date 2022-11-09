@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <link media="screen" rel="stylesheet" type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css"
+      />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link
+      src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+      rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- Latest compiled JavaScript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <script src="{% static 'js/style.js'%}"></script>
+    <title>HMS</title>
+  </head>
+
+
+  <body>
+    <div class="container-fluid" style="padding:0px ;">
+      
+        <div class="col-md-12" style="height:100px;">
+          <div class="row">
+          <!-- Navbar -->
+          
+          <nav class="navbar navbar-expand-sm side_nav fixed-top navbar-scroll" style="height:100px ;">
+            <div class="container-fluid ">
+              <button class="navbar-toggler" type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+              </button>
+              <div class="collapse navbar-collapse"
+                id="navbarSupportedContent">
+                <ul class="navbar-nav ml-5 d-flex flex-row">
+                  <li class="nav-item jm-logo">
+                    <a href="" >
+                    <img src="https://static.vecteezy.com/system/resources/previews/008/513/517/original/medical-symbol-caduceus-snake-with-stick-png.png" alt="" srcset="" style="height:35px">
+                  </a>
+                  </li>
+                </ul>
+                <ul class="navbar-nav ml-auto d-flex flex-row">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'firts_page' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                  </li>
+                  <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="{% url 'log_in' %}">
+                      Log in
+                    </a>
+                  </li>
+
+                  <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" href="{% url 'sign_in' %}">
+                      Sign up
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+        </div>
+      </div>
+
+      <!-- Navbar -->
+
+      <!--Section: Design Block-->
+
+      {% block main %}
+      <div class="col-md-12" style="margin-top:10px;">
+        <div id="carouselExampleControls" class="carousel slide"
+          data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100"
+                src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aG9zcGl0YWx8ZW58MHx8MHx8&w=1000&q=80"
+                alt="First slide" class="img-fluid"
+                style="height:500px;">
+                <div class="carousel-caption carousel_head d-none d-md-block">
+                  <h3 class="col-md-12" style="font-weight: bold; font-size: 60px;">HOSPITAL MANAGEMENT SYSTEM</h5>
+                  
+                </div>
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRw-bBKwrdHeYS4DkliAGD6O9V366XclTTTWPYR28uHusQ76MiBiBJn3uDy-tDOuqvDmAs&usqp=CAU"
+                alt="Second slide" class="img-fluid"
+                style="height:500px;">
+                <div class="carousel-caption carousel_head d-none d-md-block">
+                  <h3 class="col-md-12" style="font-weight: bold;font-size: 60px;">HOSPITAL MANAGEMENT SYSTEM</h5>
+                  
+                </div>
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100"
+                src="https://www.financialexpress.com/wp-content/uploads/2022/01/Ayu-health-hospitals.jpg"
+                alt="Third slide" class="img-fluid"
+                style="height:500px;">
+                <div class="carousel-caption carousel_head d-none d-md-block">
+                  <h3 class="col-md-12" style="font-weight: bold;font-size: 60px;">HOSPITAL MANAGEMENT SYSTEM</h5>
+                  
+                </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev"
+            href="#carouselExampleControls" role="button"
+            data-slide="prev">
+            <span class="carousel-control-prev-icon"
+              aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next"
+            href="#carouselExampleControls" role="button"
+            data-slide="next">
+            <span class="carousel-control-next-icon"
+              aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-12 row mt-5">
+        <div class="col-md-5 ">
+          <img
+            src="https://www.apolloinformationcentre.com/wp-content/uploads/2019/07/apollo-hospitals-kolkata-big.jpg"
+            alt="" srcset="" class="img-fluid shadow-lg p-3 mb-5 right_side rounded" style="height:
+            400px;">
+        </div>
+        <div class="col-md-7">
+
+          <div class="details  shadow-lg p-3 mb-5 right_side rounded">
+            <div class="sub-title">
+              <h4 style="color:#fff;">Welcome to</h4><br>
+              <h2>Hms General Hospital &amp; <span>Speciality
+                  Surgical Centre</span></h2>
+            </div><br>
+            <div class="text-contents">
+              <p>Hms General Hospital &amp; Speciality Surgical
+                Centre is located just 500 meters away from the
+                State
+                Highhway
+                near Shornur road, Thrissur, Kerala. We trace our
+                beginning to 2001. It was the dawn of the new
+                millennium
+                and everyone was waiting for a change for the
+                betterment of the humanity. It began as a vision of
+                Dr. V. K
+                Abdul Azeez and a team of Doctors to provide quality
+                and affordable healthcare service to the common man.
+                Hms has carved its own niche in the healthcare
+                sector of Kerala by offering affordable and superior
+                medical
+                care to its patients. The hospital lives up to its
+                motto,<strong> "Caring with Compassion"</strong>
+              </p>
+              <a
+                href="https://www.Hmsgeneralhospital.com/about-us.php"
+                class="btn normal_button m- mt-5" title="Read more
+                about us">Read more
+                about
+                us</a>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-12   row mt-5 ">
+        <div class="col-md-12 text-center"><h2
+            style="color:#fff;">Best Doctors in India</h2></div>
+        <div id="indian_doctors" class="carousel slide m-4 d-flex
+          justify-content-center " data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#indian_doctors" data-slide-to="0"
+              class="active"></li>
+            <li data-target="#indian_doctors" data-slide-to="1"></li>
+            <li data-target="#indian_doctors" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="col-md-12 row">
+                <div class="col-md-3 p-3 ">
+                  <div class="card" >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/anyconv.com_dr._vijay_dikshit.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body background_shade">
+                      <h5 class="card-text ">Dr. Vijay Dikshit </h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 p-3">
+                  <div class="card" >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr._ajay-min.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr. Ajay Kaul</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 p-3">
+                  <div class="card" >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr-vinod-raina-hemato-oncology-2.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr. Vinod Raina </h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 p-3">
+                  <div class="card" >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr_nandkishore.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr Nandkishore Kapadia
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="col-md-12 row">
+                <div class="col-md-3 p-3">
+                  <div class="card" >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr-arun-saroha-neurlogy-neurosurgery.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr. Arun Saroha </h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 p-3">
+                  <div class="card" >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr-sandeep-vaishya-brain-tumours-neurology-neurosurgery-1.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">
+                        Dr. Sandeep Vaishya</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 p-3">
+                  <div class="card"  >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr_z_s_meharawal.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr IPS Oberoi</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 p-3">
+                  <div class="card"  >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr-ips-oberoi-orthopaedics_1.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr Y K Mishra </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <diV class="col-md-12 row">
+                <div class="col-md-3 p-3">
+                  <div class="card"  >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr-robert-mao-cardiologist.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr. Robert Mao </h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 p-3">
+                  <div class="card"  >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr-t-s-kler-cardiology-min.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr. T. S. Kler </h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 p-3">
+                  <div class="card"  >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/ramesh_sarin-min.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr. Ramesh Sarin </h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 p-3">
+                  <div class="card"  >
+                    <img
+                      src="https://www.vaidam.com/sites/default/files/dr_iyer.jpg"
+                      class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-text">Dr. Krishna S Iyer </h5>
+                    </div>
+                  </div>
+                </div>
+              </diV>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#indian_doctors"
+            role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon"
+              aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#indian_doctors"
+            role="button" data-slide="next">
+            <span class="carousel-control-next-icon"
+              aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+
+
+
+      </div>
+      <div class="col-md-12 mt-5 ">
+        <div class="col-md-12 text-center mb-5 "><h2 style="color:#fff;">Our services</h2></div>
+<div class="col-md-12 row" style=" margin-left: unset;">
+<div class="col-md-4 service_s background_card"><figure><img
+              src="https://www.dayageneralhospital.com/uploads/departments/general-surgery.png"
+              alt="Image"></figure>
+          <section>
+            General and Laparoscopic Surgery
+          </section>
+          <div class="line" style="background-color:white;
+            height:1px; "></div>
+        </div>
+        <div class="col-md-4 service_s background_card" ><figure><img
+              src="https://www.dayageneralhospital.com/uploads/departments/orthopedics-joint-replacement-arthroscopy.png"
+              alt="Image"></figure>
+          <section>
+            Orthopedics &amp; Knee Replacement
+          </section>
+          <div class="line" style="background-color:white;
+            height:1px;"></div>
+        </div>
+        <div class="col-md-4 service_s background_card"><figure><img
+              src="https://www.dayageneralhospital.com/uploads/departments/internal-medicine-critical-care.png"
+              alt="Image">
+          </figure>
+          <section>
+            Internal Medicine and Critical Care
+          </section>
+          <div class="line" style="background-color:white;
+            height:1px;"></div>
+        </div>
+        <div class="col-md-4 service_s background_card" ><figure><img
+              src="https://www.dayageneralhospital.com/uploads/departments/gastroenterology.png"
+              alt="Image"></figure>
+          <section>
+            Medical &amp; Surgical Gastroenterology
+          </section>
+          <div class="line" style="background-color:white;
+            height:1px;"></div>
+        </div>
+        <div class="col-md-4 service_s background_card" ><figure><img
+              src="https://www.dayageneralhospital.com/uploads/departments/neuro-science.png"
+              alt="Image"></figure>
+          <section>
+            Neuro Science
+          </section>
+          <div class="line" style="background-color:white;
+            height:1px;"></div>
+        </div>
+        <div class="col-md-4 service_s background_card" ><figure><img
+              src="https://www.dayageneralhospital.com/uploads/departments/cardiology.png"
+              alt="Image"></figure>
+          <section>
+            Cardiology
+          </section>
+          <div class="line" style="background-color:white;
+            height:1px;"></div>
+        </div>
+      </div>
+      </div>
+
+      {% endblock %}
+
+      <!--Section: Design Block-->
+
+
+      <div class="col-md-12 no_padding">
+        <div class=" row padding_sm kart-bottom side_nav " style="
+          margin-top: 50px; color: white; padding-left:20%
+          ;padding-right: 20%;padding-top:50px;">
+          <div class="col-md-3 ">
+            <h5>Get to Know Us</h5>
+            <p>About Us</p>
+            <p>Press Releases</p>
+            <p>Careers</p>
+            <p>omega Cares</p>
+            <p>Gift a Smile</p>
+            <p>omega Science</p>
+
+          </div>
+          <div class="col-md-3 ">
+            <h5>Connect with Us</h5>
+            <p>Facebook</p>
+            <p>Twitter</p>
+            <p>Instagram</p>
+
+          </div>
+          <div class="col-md-3">
+            <h5>My Account</h5>
+            <p>Sign in</p>
+            <p>View Cart</p>
+            <p>My wishlist</p>
+            <p>Took my orders</p>
+          </div>
+          <div class="col-md-3">
+            <h5>Help</h5>
+            <p>Payment</p>
+            <p>shipping</p>
+            <p>cancellation and return</p>
+            <p>faq</p>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <!-- </div> -->
+</div>
+    </body>
+  </html>

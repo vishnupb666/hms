@@ -1,0 +1,100 @@
+<script>
+	$('.page_link').click(function(event){
+		// preventing default actions
+    
+		event.preventDefault();
+		var page_no = $(this).attr('href');
+    console.log(page_no)
+		// ajax call
+			$.ajax({
+					type: "POST",
+					// define url name
+					url: "{% url 'leaveApplications' %}", 
+					data : {    
+					page_no : page_no, 
+					csrfmiddlewaretoken: '{{ csrf_token }}',
+				},
+				// handle a successful response
+				success: function (response) {
+          $('#section_div').html(response) 
+        },
+
+				error: function () {
+					alert('Error Occured');
+				}
+			}); 
+	}); 
+
+	</script>
+
+<div class="col-md-12  right_side  p-3 mb-5 mt-3 " style="height: 400px;">
+    <input type="hidden" id="today" value="{{today}}">
+    <div>
+    <div class="col-md-12 text-center"><h4 class="headings">Leave Applications</h4></div>
+      <table class="table table-bordered  table-hover">
+          <thead>
+              <tr >
+                  <th>Name</th>
+                  <th>Department</th>
+                  <th>phone</th>
+                  <th>Leave date</th>
+                  <th>Reason</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for i in leaves %}
+             
+              <tr class="" data-id="" data-time="">
+                  
+                  <td>{{i.user_id}}</td>
+                  {% for cat in i.doc_id.all%}
+                  <td>{{cat.dep_id.name}}</td>
+                  {% endfor %}
+                  <td>{{i.user_id.user_ext.phone}}</td>
+                  <td>{{i.leave_date}}</td>
+                  <td>{{i.reason}}</td>
+                  <td style="width:20%;">
+                    {% if i.approve == 0 %}
+                    <button class="btn-sm btn-primary" id="leave_btn" onclick="leave_approve('{{i.id}}')" >Approve</button>
+                    <button class="  btn-danger btn-sm" onclick="cancel_levae('{{i.id}}')">Reject</button>
+                    {% elif i.approve == 1 %}
+                    <button class="btn-sm btn-secondary" id="leave_btn" onclick="" >Approved</button>
+                    {% elif i.approve == 3 %}
+                    <button class="btn-sm btn-secondary" id="leave_btn" onclick="" >Reject</button>
+                    {% endif %}
+                      
+                  </td>
+              </tr>
+              {% endfor%}
+          </tbody>
+  
+      </table>
+    </div>
+  </div>
+  <center>
+    <div class="pagination right_side col-md-6 ">
+      <span class="step-links col-md-12 row">
+          
+    
+          <span class="current col-md-6 mt-2 mb-2 ">
+              Page {{ leaves.number }} of {{ leaves.paginator.num_pages }}.
+          </span>
+          <div class="col-md-6 ">
+          {% if leaves.has_previous %}
+            <div class=" row">
+              <a class="page_link m-2" href="1">&laquo; first</a>
+              <a class="page_link m-2" href="{{ leaves.previous_page_number }}">previous</a>
+            </div>
+          {% endif %}
+    
+          {% if leaves.has_next %}
+          <div class=" row">
+              <a type="button" class="page_link m-2" href="{{ leaves.next_page_number }}">next</a>
+              <a type="button" class="page_link m-2" href="{{ leaves.paginator.num_pages }}">last &raquo;</a>
+            </div>
+          {% endif %}
+        </div>
+      </span>
+    </div>
+    </center>

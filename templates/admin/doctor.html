@@ -1,0 +1,66 @@
+<script>
+    $(document).ready(function(){
+        listDoctors();
+    })
+    function listDoctors(){
+
+url = '/listDoctors';
+$.ajax({
+   
+    url : url,
+    beforeSend:function(){
+        $('#listDoc').empty()
+    },
+    success:function(data){
+        $('#listDoc').html(data)
+    },
+    
+});
+
+}
+
+</script>
+<div class="col-md-12 row ">
+    {% if user.is_authenticated %}
+    <div class="col-md-12 row right_side  p-3 mb-5  mt-3" id="listDoc" style="height: 400px;"></div>
+  
+    {% endif %}
+    <!-- {% if user.is_superuser%}
+    <div class="col-md-4 border  ">
+        <div class="col-md-12 text-center"><h3> Add doctor</h3></div>
+        
+            <form method="post" id="doctor_data">
+                {% csrf_token%}
+                <input type="hidden" id="hidden_id" name="hidden_id" value="0">
+                <div class="col-md-12 row" style="height:300px ;">
+                
+                <div class="col-md-12 row" style="height:100px ;">
+                <div class="col-md-6 mt-3"><label for=""> Doctor name</label></div>
+                <div class="col-md-6 mt-3"><input id="doctor" name="doctor" class="form-control"></div>
+                <div class="col-md-6 mt-3"><label for="">Department</label></div>
+                <div class="col-md-6 mt-3"><select class="col-md-12 " name="depart" id="depart" style="height:40px;">
+                    <option>select department</option>
+                        {% for i in dep %}
+                        <option value="{{i.id}}">{{i.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            </div>
+                <div class="col-md-12 row mt-3 mb-3">
+                    <div class="col-md-6">
+                    <button type="button" class="btn btn-success btn-sm btn-block from-control" onclick="saveDoctor()"> Save</button>
+                    </div>
+                    <div class="col-md-6">
+                    <button type="button" class="btn btn-primary btn-sm btn-block from-control" onclick="Doc_refresh()"> Refresh</button>
+                    </div>
+
+                </div>
+            
+           
+            </form>
+        
+
+    </div>
+    {% endif %} -->
+</div>

@@ -1,0 +1,42 @@
+<script>
+    $(document).ready(function(){
+        listdepartment()
+    })
+    function listdepartment(){
+    url = '/listDpartment';
+    $.ajax({
+       
+        url : url,
+        beforeSend:function(){
+            $('.list_category').empty()
+        },
+        success:function(data){
+            $('.list_category').html(data)
+        },
+        
+    });
+
+}
+</script>
+
+<div class="col-md-12 row" style="height: 400px;">
+    <div class="col-md-8 right_side row p-3  mb-5 mt-3 list_category mt-3  " ></div>
+   
+    <div class="col-md-4  right_side row ml-3 mb-5 mt-3  " >
+        <div class="col-md-12  p-3 text-center"><h4 class="headings">Add department</h4></div>
+        <form method="POST" id="add_depart">
+
+            {% csrf_token %}
+            <div class="col-md-12 ">
+                <input type="hidden" id="hidden_id" name="hidden_id" value="0">
+                <div class=" row" style="height:300px ;">
+                <div class="col-md-6 mt-3 "><label class="form_label" for=""> Name:</label></div>
+                <div class="col-md-6 mt-3"><input type="text" class="form-control" name="dpt_name" id="dpt_name" required></div></div>
+                <div class="col-md-12 row mt-3 mb-3 "> <div class="col-md-6"><button type="button" class="btn btn-success btn-sm  btn-block from-control pull-left" onclick="addDepartment()"> Save</button></div> <div class="col-md-6"><button class="btn btn-block from-control btn-primary btn-sm " onclick="depart_refresh()">Refresh</button></div></div>
+            </div>
+        </form>
+        
+    </div>
+
+    
+</div>

@@ -1,0 +1,164 @@
+<div class="container-fluid mt-3"  style="">
+    <div class="row">
+
+        <div class="col-md-9 row">
+            <div class="col-md-12 right_side row  p-3 mb-5 mt-3  mt-3 ">
+                <div class="col-md-12 mb-2 text-center "><h2 class="headings">Edit profile</h2></div>
+                <form class ="was-validated" action="{% url 'editProfile' %}" id="register" name="register" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="col-md-12 row">
+                        <div class="col-md-6">
+                            <div class="row mt-3">
+                                <div class="col-md-6 "><label class="form_label" for="fname">Enter
+                                        your first name</label></div>
+                                <div class="col-md-6"><input type="text"
+                                        id="fname" name="fname" class="form-control" value="{{user.first_name}}" required></div>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out
+                                    this field.</div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="form_label" for="username">Enter
+                                        your username</label></div>
+                                <div class="col-md-6"><input type="text"
+                                        id="username" name="username" class="form-control" value="{{user.username}}" required></div>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out
+                                    this field.</div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="form_label" for="lname">Enter
+                                        last name</label></div>
+                                <div class="col-md-6"><input type="text"
+                                        id="lname" name="lname" class="form-control" value="{{user.last_name}}" required></div>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out
+                                    this field.</div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="form_label" for="">Phone number</label></div>
+                                <div class="col-md-6"><input class="form-control" type="phone"
+                                        id="phone" name="phone" value="{{user_ext.phone}}" required></div>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out
+                                    this field.</div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="form_label" for="">Email</label></div>
+                                <div class="col-md-6"><input class="form-control" type="email"
+                                        id="email" name="email" value="{{user.email}}" required></div>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out
+                                    this field.</div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="form_label" for="">Upload Photo</label></div>
+                                <div class="col-md-6">
+                                <input class="" type="file" id="image" name='edit_image' ></div>
+                                <input type="hidden" name="edit_pic" value="{{user_ext.image.url}}">
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <h6 class="mb-0 me-4 " style="color:#fff;">Gender: </h6></div>
+                                <div class="col-md-12">
+                                    <div class="form-check form-check-inline
+                                        mb-0 me-4">
+                                        <input class="form-check-input"
+                                            type="radio" {% if user_ext.gender == 'female' %} checked {% endif %}  name="gender"
+                                            id="female"
+                                            value="female" />
+                                        <label class="form-check-label"
+                                            for="female" style="color:#fff;">Female</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline
+                                        mb-0 me-4">
+                                        <input class="form-check-input"
+                                            type="radio" {% if user_ext.gender == 'male' %} checked {% endif %} name="gender" id="male"
+                                            value="male" />
+                                        <label class="form-check-label"
+                                            for="male" style="color:#fff;">Male</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline
+                                        mb-0">
+                                        <input class="form-check-input"
+                                            type="radio" {% if user_ext.gender == 'other' %} checked {% endif %} name="gender"
+                                            id="other"
+                                            value="other" />
+                                        <label class="form-check-label"
+                                            for="other" style="color:#fff;">Other</label>
+                                    </div>
+                                </div>
+
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out
+                                    this field.</div>
+                            </div>
+                           
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="form_label" for="address">Address</label></div>
+                                <div class="col-md-6"><input  class="form-control" type="text"
+                                        id="address" value="{{user_ext.address}}" name="address"></div>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out
+                                    this field.</div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6"><label class="form_label" for="doctor">Date
+                                        of birth</label></div>
+                                <div class="col-md-6"><input class="form-control" type="date"
+                                        id="dob" value="{{user_ext.dob|date:'Y-m-d'}}" name="dob"></div>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out
+                                    this field.</div>
+                            </div>
+                            <div class="col-md-6 pull-right"
+                                style="margin-top:30px;"><input type="submit"
+                                    value="Update" class="btn btn-block
+                                    btn-success btn-sm"></div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-md-3 right_side row  p-3 mb-5 mt-3 ml-3  mt-3 "
+            style="height:500px;">
+            <div class="d-flex justify-content-center profile mt-3 ">
+                <div class="pro_pic" style="">
+                    <img src="{{user_ext.image.url}}" style="height:100px;" class="img-fluid" alt="">
+                </div>
+            </div>
+            <div class=" row mt-3 pt-3">
+                <div class="col-md-6 "><label class="form_label">Name</label></div>
+                <div class="col-md-6 "><label class="form_label">{{user.username}}</label></div>
+            </div>
+
+            <div class=" row mt-3 p-1">
+                <div class="col-md-6 "><label class="form_label" >User Name</label></div>
+                <div class="col-md-6 "><label class="form_label">{{user.username}}</label></div>
+            </div>
+            <div class=" row mt-3 p-1">
+                <div class="col-md-6 "><label class="form_label">Address</label></div>
+                <div class="col-md-6 "><label class="form_label">{{user_ext.address}}</label></div>
+            </div>
+            <div class=" row mt-3 p-1">
+                <div class="col-md-6 "><label class="form_label">Phone</label></div>
+                <div class="col-md-6 "><label class="form_label">{{user.user_ext.phone}}</label>
+                </div>
+            </div>
+            <div class=" row mt-3 p-1">
+                <div class="col-md-6 "><label class="form_label" >dob</label></div>
+                <div class="col-md-6 "><label class="form_label">{{user.user_ext.dob}}</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

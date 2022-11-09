@@ -1,0 +1,91 @@
+<script>
+    $('.page_link').click(function(event){
+		// preventing default actions
+        
+		event.preventDefault();
+		var page_no = $(this).attr('href');
+    console.log(page_no)
+		// ajax call
+			$.ajax({
+					type: "POST",
+					// define url name
+					url: "{% url 'view_doc_wise_patient' user.id %}", 
+					data : {    
+					page_no : page_no, 
+					csrfmiddlewaretoken: '{{ csrf_token }}',
+				},
+				// handle a successful response
+				success: function (response) {
+          $('#section_div').html(response) 
+        },
+
+				error: function () {
+					alert('Error Occured');
+				}
+			}); 
+	});
+</script>
+
+<div class="col-md-12 right_side row  p-3 mb-5  mt-3  mt-3"style="height:\0px;">
+    <div class="col-md-12 text-center"> <h4 class="headings">Patients</h4></div>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>phone</th>
+            <th>Date</th>
+            <th>Actions</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in appointments %}+
+        <tr>
+            <td style="width:20%">{{i.user_id.user_id.first_name}}</td>
+            <td style="width:20%">{{i.user_id.address}}</td>
+            <td style="width:20%">{{i.user_id.phone}}</td>
+            <td style="width:20%">{{i.date}}</td>
+            <td style="width:20%">
+                {% if i.requested == 1 %}
+                <button class="btn btn-success btn-sm edit_button" onclick="approve('{{i.id}}')">Approve</button>
+                <button class="btn btn-danger btn-sm edit_button" onclick="cancelapp('{{i.id}}')">Reject</button>
+                {% elif i.requested == 2 %}
+                <button class="btn btn-success btn-sm edit_button" onclick="">Approved</button>
+                {% elif i.requested == 3 %}
+                <button class="btn btn-danger btn-sm edit_button" onclick="">Rejected</button>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+    </table>
+</div>
+<center>
+    <div class="pagination right_side col-md-6 ">
+      <span class="step-links col-md-12 row">
+          
+    
+          <span class="current col-md-6 mt-2 mb-2 ">
+              Page {{ appointments.number }} of {{ appointments.paginator.num_pages }}.
+          </span>
+          <div class="col-md-6 ">
+          {% if appointments.has_previous %}
+            <div class=" row">
+              <a class="page_link m-2" href="1">&laquo; first</a>
+              <a class="page_link m-2" href="{{ appointments.previous_page_number }}">previous</a>
+            </div>
+          {% endif %}
+    
+          {% if appointments.has_next %}
+          <div class=" row">
+              <a type="button" class="page_link m-2" href="{{ appointments.next_page_number }}">next</a>
+              <a type="button" class="page_link m-2" href="{{ appointments.paginator.num_pages }}">last &raquo;</a>
+            </div>
+          {% endif %}
+        </div>
+      </span>
+    </div>
+    </center>
+

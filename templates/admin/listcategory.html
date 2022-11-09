@@ -1,0 +1,82 @@
+<script>
+	$('.page_link').click(function(event){
+		// preventing default actions
+    
+		event.preventDefault();
+		var page_no = $(this).attr('href');
+    console.log(page_no)
+		// ajax call
+			$.ajax({
+					type: "POST",
+					// define url name
+					url: "{% url 'listDpartment' %}", 
+					data : {    
+					page_no : page_no, 
+					csrfmiddlewaretoken: '{{ csrf_token }}',
+				},
+				// handle a successful response
+				success: function (response) {
+          $('.list_category').html(response) 
+        },
+
+				error: function () {
+					alert('Error Occured');
+				}
+			}); 
+	}); 
+
+	</script>
+
+<div class="col-md-12">
+    <div class="col-md-12 text-center"><h4 class="headings">Departments</h4></div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+            <th>
+                Department
+            </th>
+            <th>
+                Action
+            </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in dep %}
+            <tr>
+                <td style="width:70%">{{i.name}}</td>
+                <td style="width:300%"><div class="col-md-12 d-flex justify-content-center row"><div class="col-md-6"><button class="btn btn-success btn-sm" onclick="delete_category('{{i.id}}')">Remove </button></div><div class="col-md-6"><button class="btn btn-primary btn-sm edit_button" onclick="edit_category('{{i.id}}','{{i.name}}')">Edit </button></div></div></td>
+            </tr>
+            {% endfor%}
+
+
+        </tbody>
+
+    </table>
+    
+</div>
+<center>
+    <div class="pagination right_side col-md-6 ">
+      <span class="step-links col-md-12 row">
+          
+    
+          <span class="current col-md-6 mt-2 mb-2 ">
+              Page {{ dep.number }} of {{ dep.paginator.num_pages }}.
+          </span>
+          <div class="col-md-6 ">
+          {% if dep.has_previous %}
+            <div class=" row">
+              <a class="page_link m-2" href="1">&laquo; first</a>
+              <a class="page_link m-2" href="{{ dep.previous_page_number }}">previous</a>
+            </div>
+          {% endif %}
+    
+          {% if dep.has_next %}
+          <div class=" row">
+              <a type="button" class="page_link m-2" href="{{ dep.next_page_number }}">next</a>
+              <a type="button" class="page_link m-2" href="{{ dep.paginator.num_pages }}">last &raquo;</a>
+            </div>
+          {% endif %}
+        </div>
+      </span>
+    </div>
+    </center>
