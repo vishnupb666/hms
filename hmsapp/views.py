@@ -414,7 +414,13 @@ def delete_doc(request,pk):
     if request.method=="POST":
         del_doc = doctor.objects.get(id=pk)
         user = User.objects.get(id=del_doc.user_id.id)
-        user.delete()
+        my_patient_group = Group.objects.get_or_create(name='PATIENT')
+        my_patient_group[0].user_set.add(user)
+        usr = user_ext.objects.get(user_id=user.id)
+        rol = role.objects.get(id =3)
+        usr.rol_id = rol
+        usr.save()
+        del_doc.delete()
         return JsonResponse({'status':1})
     else:
         return JsonResponse({'status':2})
@@ -472,6 +478,7 @@ def updaterole(request):
         rol = role.objects.get(id =rol_id )
         usr.rol_id = rol
         usr.save()
+
         print(type(rol_id))
         if rol_id == '1':
             my_admin_group = Group.objects.get_or_create(name='ADMIN')
