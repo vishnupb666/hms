@@ -32,8 +32,6 @@ class appointment(models.Model):
     Approved = models.IntegerField(null=True)
     department = models.ForeignKey(department,on_delete=models.CASCADE,null=True,blank=True)
     time = models.TimeField(null=True)
-
-
 class leave(models.Model):
     user_id = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     doc_id = models.ManyToManyField(doctor,blank=True,)
