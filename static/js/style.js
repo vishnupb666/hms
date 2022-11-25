@@ -432,7 +432,13 @@ function approve(id){
             console.log(data)
             if(data.status==1){
                 toastr.success('request approved....')
-                adviewappointmnt();
+                if(data.rol==1){
+                    adviewappointmnt();
+                }else{
+                    view_doc_wise_patient(data.user_id)
+                }
+
+                
             }
         },
         
@@ -618,7 +624,7 @@ function delete_patient(id){
             console.log(data)
             if(data.status==1){
                 toastr.success('success fully deleted')
-                viewPatients();
+                view_patient();
             }
         },
         
@@ -992,11 +998,11 @@ function cancel_levae(id){
             console.log(data)
             if(data.status==1){
                 toastr.success('request canceled....')
-                list_leave(user_id)
+                leaveApplication();
             }
             
         },
-        
+ 
     });
 
 

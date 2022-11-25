@@ -73,6 +73,9 @@ def home(request):
 
 def log_in(request):
     if request.method=="POST":
+        storage = messages.get_messages(request)
+        for i in list(storage._loaded_messages):
+            del storage._loaded_messages[0]   
         uname = request.POST['username']
         password = request.POST['password']
         user = auth.authenticate(username=uname,password=password)
@@ -81,7 +84,7 @@ def log_in(request):
             return redirect('home')
         else:
             messages.info(request,'User does not exist...')
-            return redirect('sign_in')
+            return render(request,'log_in.html',{'some_flag':True})
     return render(request,'log_in.html')
 def sendMail(email,password,username):       
     subject = 'Hospital '
@@ -108,7 +111,11 @@ def generateOTP(request) :
     return JsonResponse({'status':password})
 
 def sign_in(request):
+    
     if request.method=='POST':
+        storage = messages.get_messages(request)
+        for i in list(storage._loaded_messages):
+            del storage._loaded_messages[0]   
         fname = request.POST['fname']
         username = request.POST['username']
         lname = request.POST['lname']
@@ -129,7 +136,7 @@ def sign_in(request):
             if password==c_password:
                 if User.objects.filter(username = username).exists():
                    messages.info(request,'username already exist...')
-                   return redirect('sign_in')
+                   return render(request,'sign_in.html',{'some_flag':True})
                 else:
                     user = User.objects.create_user(
                         first_name=fname,
@@ -151,10 +158,10 @@ def sign_in(request):
                     
             else:
                 messages.info(request,'password was incorrect...')
-                return redirect('sign_in')
+                return render(request,'sign_in.html',{'some_flag':True})
         except:
             messages.info(request,'network error...')
-            return redirect('log_in')
+            return render(request,'sign_in.html',{'some_flag':True})
         else:
             print(1)
             user.save()
@@ -163,7 +170,8 @@ def sign_in(request):
             my_patient_group[0].user_set.add(user)
             sendMail(email,password,username)
             messages.info(request,'Registered successfully....')
-            return redirect('log_in')
+
+            return render(request,'sign_in.html',{'some_flag':True})
     return render(request,'sign_in.html')
    
 login_required(login_url='log_in')
@@ -288,9 +296,10 @@ def viewAppointment(request):
     page_number = request.POST.get('page_no')
     print(page_number)
     appointments = appointmen.get_page(page_number)
+    pagination = appointmen.get_page(page_number)
     print(appointments)
     
-    return render(request,'user/viewappointment.html',{'appointments':appointments,'today':today})
+    return render(request,'user/viewappointment.html',{'appointments':appointments,'today':today,'pagination':pagination})
 
 def adViewAppointment(request):
     app = appointment.objects.all()
@@ -314,9 +323,9 @@ def approve(request):
         update = appointment.objects.get(id=id)
         update.requested=2
         update.save()
-        return JsonResponse({'status':1})
+        return JsonResponse({'status':1,'user_id':request.user.id,'rol':request.user.is_superuser})
     else:
-        return JsonResponse({'status':0})
+        return JsonResponse({'status':0,'user_id':request.user.id})
 
 @csrf_exempt
 def cancelappointment(request):
