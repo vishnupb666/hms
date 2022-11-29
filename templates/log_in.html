@@ -9,6 +9,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script
@@ -113,7 +114,7 @@ letter-spacing:0.5px;
             <input type="checkbox" class="form-check-input">
             <label class="form-check-label" style="color:white ;">Yes, I'd like to recieve news and special offers</label>
           </div>
-                  <input type="submit" class="btn btn-lg w-100" style="background-color:#007dc6 ;color:#fff" value="SIGN UP">
+                  <input type="submit" class="btn btn-lg w-100" style="background-color:#007dc6 ;color:#fff" value="LOG IN">
         </form>
         <h6 class="m-0 pt-5"><a href="{% url 'sign_in'%}" class="text-dark small">Register</a></h6>
         </div>
@@ -124,35 +125,24 @@ letter-spacing:0.5px;
         </div>
 </div>
 {% if some_flag %}
-    <div id="some_flag" title="Info">
-        <p style="color:black ;"><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span> User does not exist</p>
-       
+    <div id="some_flag" title="Info" style="">
+        <p style="color:black ;float:left; margin:12px 12px 20px 0;"><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;" ></span> </p>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $(function() {
+                    swal({
+                    title: "Warning",
+                    text: "Invalid data ",
+                    icon: "warning",
+                    button: "OK",
+              });
+                });
+            });
+        </script>
     </div>
 {% endif %}
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(function() {
-            $( "#some_flag" ).dialog({
-                modal: true,
-                closeOnEscape: false,
-                dialogClass: "no-close",
-                resizable: false,
-                draggable: false,
-                width: 600,
-                buttons: {
-        "Sign in": function() {
-         url = "/sign_in";
-         window.location = url;
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-            });
-        });
-    });
-</script>
+
 
   <!-- Pills content -->
   </html>

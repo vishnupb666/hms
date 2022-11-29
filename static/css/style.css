@@ -74,8 +74,8 @@ background-image:linear-gradient(#E6A2C3, #BF7DA0) ;
     
 }
 @keyframes rowcolor {
-    from {background-color: red;}
-    to {background-color: yellow;}
+    /* from {background-color: red;}
+    to {background-color: yellow;} */
   }
 .warning_msg{
     animation-name: rowcolor;

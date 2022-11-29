@@ -8,6 +8,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -264,38 +266,72 @@ letter-spacing:0.5px;
 </div>
 {% if some_flag %}
     <div id="some_flag" title="Info">
-      {% for i in messages%}
-      <div>{{i}}</div>
-      {% endfor %}
+      <script type="text/javascript">
+        $(document).ready(function() {
+            $(function() {
+              
+              swal({
+                title: "Warning",
+                text: "Username already exist",
+                icon: "warning",
+                button:"Cancel"
+              })           
+            });
+        });
+      </script>
+        
+    </div>
+{% endif %}
+{% if success_msg %}
+    <div id="some_flag" title="Info">
+      <script type="text/javascript">
+        $(document).ready(function() {
+            $(function() {
+              
+              swal({
+                title: "Good job",
+                text: "Success fully registered",
+                icon: "success",
+                buttons:{
+               
+                  catch:{
+                    text:"log in",
+                    value:"catch",
+                  },
+                  ok:true,
+                } ,
+              }).then((value) => {
+
+              switch (value) {
+              case 'catch':
+                {
+              window.location = "/log_in"
+                break;
+              }
+              default:{
+                swal("OK");
+              }
+
+              }
+              });
+
+              
+            });
+        });
+      </script>
         
     </div>
 {% endif %}
 
-  <script type="text/javascript">
-        $(document).ready(function() {
-            $(function() {
-                $( "#some_flag" ).dialog({
-                    modal: true,
-                    closeOnEscape: false,
-                    dialogClass: "no-close",
-                    resizable: false,
-                    draggable: false,
-                    width: 600,
-                    buttons: {
-        "Log in": function() {
-         url = "/log_in";
-         window.location = url;
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-                });
-            });
-        });
-    </script>
+  
 
   <!-- Pills content -->
   </html>
 
   {% endblock %}
+  <!-- <script>swal({
+    title: "Good job!",
+    text: ""+<div>{{i}}</div>+"",
+    icon: "success",
+    button: "OK",
+    });</script> -->

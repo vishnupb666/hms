@@ -171,7 +171,7 @@ def sign_in(request):
             sendMail(email,password,username)
             messages.info(request,'Registered successfully....')
 
-            return render(request,'sign_in.html',{'some_flag':True})
+            return render(request,'sign_in.html',{'success_msg':True})
     return render(request,'sign_in.html')
    
 login_required(login_url='log_in')
